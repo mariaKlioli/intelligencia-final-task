@@ -52,12 +52,13 @@ Here are represented instructions for the set up of the application. As I mentio
 6. Open now the pgAdmin you downloaded in step 4. You will asked to insert a password. You are free to insert what you want. However, I have inserted as master password "admin" .
 7. Now, open the application postgreSQL in step 6. Install and set up the application. Again here you will asked to insert a password (YOU HAVE TO REMEMBER THE PASSOWRD- here I have inserted pass1234).
 8. Now, if we open the pdAdmin it will request us the two passwords, so insert them.
-9. Now, we have to create a database in the pdAdmin panel ( databases -> right click -> create -> database) and give a name. 10. My database name for example is called bioactivities.
-11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities".
+9. Now, we have to create a database in the pdAdmin panel ( databases -> right click -> create -> database) and give a name.<br/>
+10. My database name for example is called bioactivities.<br/>
+11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities".<br/>
 12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
 **pip -r install requirements.txt**
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
-Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/**
+Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/** <br/>
 14. You have to enter here the login username and password. We have to create for the database a superuser. Go back to the terminal of pycharm and type: <br/>
 **python manage.py createsuperuser**<br/>
 **enter user name: maria** <br/>
