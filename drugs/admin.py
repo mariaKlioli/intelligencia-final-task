@@ -37,19 +37,3 @@ admin.site.register(Publications,PublicationsAdmin)
 
 
 
-
-
-
-# class DrugsAdmin(admin.ModelAdmin):
-#     # a list of displayed columns name.
-#     # search field for the admin database
-#     list_display = ['compound_name', 'chembl_id','authors',  'gene_name', 'pubmed_id',
-#                    'target_pref_name',]
-#     search_fields = ('compound_name', 'chembl_id','authors', 'gene_name','pubmed_id', 'target_pref_name',)
-#
-# admin.site.register(Drug, DrugsAdmin)
-
-# class DrugsNewAdmin(admin.ModelAdmin):
-#     list_display = ['compound']
-#     # search_fields = ('compound',)
-#
