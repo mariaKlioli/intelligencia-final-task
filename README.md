@@ -56,3 +56,8 @@ Our database is ready! Now run the Views.py and drugs_info. The second one will 
 **enter user name: maria** 
 **enter password: lioli**
 15. Your new user for django admin panel has been created. Enter credentials, run Views.py and you will see thath django panel will have records inside.
+
+
+
+
+
