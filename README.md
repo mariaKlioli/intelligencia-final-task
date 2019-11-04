@@ -37,7 +37,7 @@ The second option, I couldn't implement it, as I observed I haven't a field from
 
 Here are represented instructions for the set up of the application. As I mentioned before, the application has bee n developed with the use of Python Django framework and Postgresql database. You must do the following steps for the application to be executed:
 
-1. Open an editor where the project will be able to execute (eg. Pycharm)
+1. Open an editor where the project will be able to execute (eg. Pycharm) 
 2. Clone the project from the github link that I have provided you with.
 3. You can observe that in the files of the project, you can find a file call requirements.txt. In this text file are provided the necessary packages that the project uses and you have to install in your environment.
 4. Now, you have to install some applications for the postgresql. The first is called pgAdmin and you can download it from the following url (either for MACOS or WINDOWS): postgresql.org/ftp/pgadmin/ .
@@ -51,10 +51,10 @@ Here are represented instructions for the set up of the application. As I mentio
 **pip -r install requirements.txt**
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
 Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/**
-14. You have to enter here the login username and password. We have to create for the database a superuser. Go back to the terminal of pycharm and type: 
-**python manage.py createsuperuser**
-**enter user name: maria** 
-**enter password: lioli**
+14. You have to enter here the login username and password. We have to create for the database a superuser. Go back to the terminal of pycharm and type: <br/>
+**python manage.py createsuperuser**<br/>
+**enter user name: maria** <br/>
+**enter password: lioli**<br/>
 15. Your new user for django admin panel has been created. Enter credentials, run Views.py and you will see thath django panel will have records inside.
 
 
