@@ -5,27 +5,28 @@ Data-engineering-task In this task the goal was to create a data streaming by in
 
 The main goal as I mentioned before, is to retrieve data from an API (especially spesific fields) and store them in a postgresql database. The 6 fields of data that I had to retrieve are : compound_name, chembl_id, uniprot_id, gene_name, target_pref_name,authors and pubmed_id. In a nutshell, compound_name represents the name of the compound that it is possible to bind in a protein, chembl_id is respectively the id of each compound in a spesific database called chembl. Furthermore, gene_name represents the name of the gene that it is responsible for the production of proteins. Uniprot_id represent the id of a protein in a databas called uniprot, while the target_pref_name is mainly the name of the protein or enzyme. On the other hand, pubmed_id is an id that refers to a spesific scientific article, while authors field update us for the name of the authors of each article. Due to the previous descriptions of the retrieved fields, I have implemented a database called """" with three tables:
 
-Compound (fields: compound_name,chembl_id)
+1. Compound (fields: compound_name,chembl_id)
 
-Target (fields: uniprot_id, gene_name, target_pref_name)
+2. Target (fields: uniprot_id, gene_name, target_pref_name)
 
-Puplications (fields: authors,pubmed_id) This three tables, have relations. To find them, I throught the following: One compound, can be in many Targets and in many targets ( if the compound does not target to only one protein). One Target can have many compounds. In these two tables we have many to many relation between Compound-Target. One Compound can be found in many publications, while one publication can refer to may targets. Again here we have many to many relation between Compound - Publications. On Target can have many publications where one publication can refer to many targets. Again here, we have a many to many relation between Target-Publications . These considerations have been created based on the format of the datbase in target common page and the respectively paper. After the database relationship creation, I have entered some constraints in order to ensure the data integrity. These are the following:
+3. Puplications (fields: authors,pubmed_id) This three tables, have relations. To find them, I throught the following: One compound, can be in many Targets and in many targets ( if the compound does not target to only one protein). One Target can have many compounds. In these two tables we have many to many relation between Compound-Target. One Compound can be found in many publications, while one publication can refer to may targets. Again here we have many to many relation between Compound - Publications. On Target can have many publications where one publication can refer to many targets. Again here, we have a many to many relation between Target-Publications . These considerations have been created based on the format of the datbase in target common page and the respectively paper. After the database relationship creation, I have entered some constraints in order to ensure the data integrity. These are the following:
 
-Constraints for the uniqueness of each row inserted in the database ( avoid duplications function )
+1. Constraints for the uniqueness of each row inserted in the database ( avoid duplications function )
 
-Constraints for the nature of data that inserted into the datatable (Character, integers,etc)
+2. Constraints for the nature of data that inserted into the datatable (Character, integers,etc)
 
 Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database. delete data in table quicly:
 
-Compound.objects.all().delete()
-# Target.objects.all().delete()
-# Publications.objects.all().delete()
- # target = Target.objects.get(id=379)
-# target.gene_name = F('gene_name')
-# target.uniprot_id = F('uniprot')
-# target.gene_name = 'aliki'
-# target.uniprot_id = '333'
-# target.save()
+**Compound.objects.all().delete()**
+**Target.objects.all().delete()**
+**Publications.objects.all().delete()**
+
+**target = Target.objects.get(id=379)**
+**target.gene_name = F('gene_name')**
+**target.uniprot_id = F('uniprot')**
+**target.gene_name = 'gggg'**
+**target.uniprot_id = '333'**
+**target.save()**
 Now, in bonous section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
 
 Be able to update fields in a database without running the whole database
