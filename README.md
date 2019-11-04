@@ -3,7 +3,7 @@ Data-engineering-task In this task the goal was to create a data streaming by in
 
 **BRAIN STORMING**
 
-The main goal as I mentioned before, is to retrieve data from an API (especially spesific fields) and store them in a postgresql database. The 6 fields of data that I had to retrieve are : compound_name, chembl_id, uniprot_id, gene_name, target_pref_name,authors and pubmed_id. In a nutshell, compound_name represents the name of the compound that it is possible to bind in a protein, chembl_id is respectively the id of each compound in a spesific database called chembl. Furthermore, gene_name represents the name of the gene that it is responsible for the production of proteins. Uniprot_id represent the id of a protein in a databas called uniprot, while the target_pref_name is mainly the name of the protein or enzyme. On the other hand, pubmed_id is an id that refers to a spesific scientific article, while authors field update us for the name of the authors of each article. Due to the previous descriptions of the retrieved fields, I have implemented a database called """" with three tables:
+The main goal as I mentioned before, is to retrieve data from an API (especially spesific fields) and store them in a postgresql database. The 6 fields of data that I had to retrieve are : compound_name, chembl_id, uniprot_id, gene_name, target_pref_name,authors and pubmed_id. In a nutshell, compound_name represents the name of the compound that it is possible to bind in a protein, chembl_id is respectively the id of each compound in a spesific database called chembl. Furthermore, gene_name represents the name of the gene that it is responsible for the production of proteins. Uniprot_id represent the id of a protein in a databas called uniprot, while the target_pref_name is mainly the name of the protein or enzyme. On the other hand, pubmed_id is an id that refers to a spesific scientific article, while authors field update us for the name of the authors of each article. Due to the previous descriptions of the retrieved fields, I have implemented a database called bioactivies with three tables:
 
 1. Compound (fields: compound_name,chembl_id)
 
@@ -20,17 +20,18 @@ The main goal as I mentioned before, is to retrieve data from an API (especially
 4. Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. By adding offset to 500, I have create a bulk retrieval and insert in database in order to accelarate the procedure. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database.<br/>
 Now, in bonus section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
 
-Be able to update fields in a database without running the whole database
-Make the system able if the API has new records ,to insert these records win postgresql without running again the whole database. From the previous two options, I have implemented the first one. User can update value either from django admin panel or through python code in command line. The command for example to update values in a record is:
+The first option, is to make the system update fields in a database without running the whole database.
+The second option, is to make the system able if for example the API has new records ,to insert these records in postgresql without running again the whole database. From the previous two options, I have implemented the first one. User can update values either from django admin panel or through python code in command line. The command for example to update values in a record is:
 **target = Target.objects.get(id=379)**<br/>
 **target.gene_name = F('gene_name')**<br/>
 **target.uniprot_id = F('uniprot')**<br/>
 **target.gene_name = 'gggg'**<br/>
 **target.uniprot_id = '333'**<br/>
 **target.save()**<br/>
+Furthermore, Usert can add new values manually from the django admin page.
 If you run the previous commands in python terminal you will see that object with id 379 will update its gene_name and unipto_id in gggg and 333.
 
-The second option, I couldn't implement it, as I observed I haven't a field from the API that could informed be about the last record inserted or something like the time each record inserted in order to syhcronize with my code. However, my idea is exactly that,
+The second option, I couldn't implement it, as I observed I haven't any field from the API that could informed be about the last record inserted or something like the time in order to syhcronize this with my inserts. However, my idea is exactly that, to take the information (if exists) from the API about the last updated objects, and by adding in my postgresql a field with the time of insertion, ordering it and compare it with the first mentioned.
 
 Finally if you want to delete easily the data from database, the following commands do this:
 
