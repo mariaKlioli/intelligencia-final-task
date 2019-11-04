@@ -45,16 +45,16 @@ Finally if you want to delete easily the data from database, the following comma
 Here are represented instructions for the set up of the application. As I mentioned before, the application has bee n developed with the use of Python Django framework and Postgresql database. You must do the following steps for the application to be executed:
 
 1. Open an editor where the project will be able to execute (eg. Pycharm) 
-2. Clone the project from the github link that I have provided you with.
-3. You can observe that in the files of the project, you can find a file call requirements.txt. In this text file are provided the necessary packages that the project uses and you have to install in your environment.
-4. Now, you have to install some applications for the postgresql. The first is called pgAdmin and you can download it from the following url (either for MACOS or WINDOWS): postgresql.org/ftp/pgadmin/ .
-5. The next you have to download is the POSTGRESQL server. The link for that is the following: postgresql.org/downloads and choose you operating system.
-6. Open now the pgAdmin you downloaded in step 4. You will asked to insert a password. You are free to insert what you want. However, I have inserted as master password "admin" .
-7. Now, open the application postgreSQL in step 6. Install and set up the application. Again here you will asked to insert a password (YOU HAVE TO REMEMBER THE PASSOWRD- here I have inserted pass1234).
-8. Now, if we open the pdAdmin it will request us the two passwords, so insert them.
+2. Clone the project from the github link that I have provided you with.<br/>
+3. You can observe that in the files of the project, you can find a file call requirements.txt. In this text file are provided the necessary packages that the project uses and you have to install in your environment.<br/>
+4. Now, you have to install some applications for the postgresql. The first is called pgAdmin and you can download it from the following url (either for MACOS or WINDOWS): postgresql.org/ftp/pgadmin/ .<br/>
+5. The next you have to download is the POSTGRESQL server. The link for that is the following: postgresql.org/downloads and choose you operating system.<br/>
+6. Open now the pgAdmin you downloaded in step 4. You will asked to insert a password. You are free to insert what you want. However, I have inserted as master password "admin" .<br/>
+7. Now, open the application postgreSQL in step 6. Install and set up the application. Again here you will asked to insert a password (YOU HAVE TO REMEMBER THE PASSOWRD- here I have inserted pass1234).<br/>
+8. Now, if we open the pdAdmin it will request us the two passwords, so insert them.<br/>
 9. Now, we have to create a database in the pdAdmin panel ( databases -> right click -> create -> database) and give a name.<br/>
 10. My database name for example is called bioactivities.<br/>
-11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities".<br/>
+11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities". <br/>
 12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
 **pip -r install requirements.txt** <br/>
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
