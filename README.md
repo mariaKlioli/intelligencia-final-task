@@ -15,19 +15,19 @@ The main goal as I mentioned before, is to retrieve data from an API (especially
 
 2. Constraints for the nature of data that inserted into the datatable (Character, integers,etc)
 
-Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database. delete data in table quicly:
+Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database. delete data in table quicly:<br/>
 
-**Compound.objects.all().delete()**
-**Target.objects.all().delete()**
-**Publications.objects.all().delete()**
+**Compound.objects.all().delete()**<br/>
+**Target.objects.all().delete()**<br/>
+**Publications.objects.all().delete()**<br/>
 
-**target = Target.objects.get(id=379)**
-**target.gene_name = F('gene_name')**
-**target.uniprot_id = F('uniprot')**
-**target.gene_name = 'gggg'**
-**target.uniprot_id = '333'**
-**target.save()**
-Now, in bonous section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
+**target = Target.objects.get(id=379)**<br/>
+**target.gene_name = F('gene_name')**<br/>
+**target.uniprot_id = F('uniprot')**<br/>
+**target.gene_name = 'gggg'**<br/>
+**target.uniprot_id = '333'**<br/>
+**target.save()**<br/>
+Now, in bonus section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
 
 Be able to update fields in a database without running the whole database
 Make the system able if the API has new records ,to insert these records win postgresql without running again the whole database. From the previous two options, I have implemented the first one. User can update value either from django admin panel or through python code in command line. The command for example to update values in a record is:
