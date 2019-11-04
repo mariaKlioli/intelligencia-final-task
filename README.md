@@ -55,7 +55,7 @@ Here are represented instructions for the set up of the application. As I mentio
 9. Now, we have to create a database in the pdAdmin panel ( databases -> right click -> create -> database) and give a name.<br/>
 10. My database name for example is called bioactivities.<br/>
 11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities". <br/>
-12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
+12. Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
 **pip -r install requirements.txt** <br/>
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
 Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/** <br/>
