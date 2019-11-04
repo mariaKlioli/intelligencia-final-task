@@ -9,29 +9,35 @@ The main goal as I mentioned before, is to retrieve data from an API (especially
 
 2. Target (fields: uniprot_id, gene_name, target_pref_name)
 
-3. Puplications (fields: authors,pubmed_id) This three tables, have relations. To find them, I throught the following: One compound, can be in many Targets and in many targets ( if the compound does not target to only one protein). One Target can have many compounds. In these two tables we have many to many relation between Compound-Target. One Compound can be found in many publications, while one publication can refer to may targets. Again here we have many to many relation between Compound - Publications. On Target can have many publications where one publication can refer to many targets. Again here, we have a many to many relation between Target-Publications . These considerations have been created based on the format of the datbase in target common page and the respectively paper. After the database relationship creation, I have entered some constraints in order to ensure the data integrity. These are the following:
+3. Puplications (fields: authors,pubmed_id) This three tables, have relations. To find them, I throught the following: One compound, can be in many Targets and in many targets ( if the compound does not target to only one protein). One Target can have many compounds. In these two tables we have many to many relation between Compound-Target. One Compound can be found in many publications, while one publication can refer to may targets. Again here we have many to many relation between Compound - Publications. On Target can have many publications where one publication can refer to many targets. Again here, we have a many to many relation between Target-Publications . These considerations have been created based on the format of the database in target common page and the respectively paper. After the database relationship creation, I have entered some constraints in order to ensure the data integrity. These are the following:
 
-1. Constraints for the uniqueness of each row inserted in the database ( avoid duplications function )
+1. Constraints for the uniqueness of each row inserted in the database ( avoid duplications function ). Here I have to mention that, I check for duplications in all tables for each row. 
 
 2. Constraints for the nature of data that inserted into the datatable (Character, integers,etc)
 
-Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database. delete data in table quicly:<br/>
+3. I have created a condition in order to have at least one of these 6 fields that retrieved from API non empty.
 
-**Compound.objects.all().delete()**<br/>
-**Target.objects.all().delete()**<br/>
-**Publications.objects.all().delete()**<br/>
+4. Validators for the data that may one user wants to add in django admin page. For example, some fields need to be only numbers, while some others both numbers and characters. All the previous statements, had to do with the architecture of the database. Now, for the retrieval of the data from the API, I read the instructions and the scientific article for the target common database and I saw, that the data occur paginated. In each page I can retrieve max 500. So, my pagination fuction retrieves 500 items in each iteration and increases the offset which again has the value 500 starting from 0. By adding offset to 500, I have create a bulk retrieval and insert in database in order to accelarate the procedure. Due to the fact that the total count of data from the API are about 14bilions, the retrieval and insertion in database is a bit slow . About 100.000 per hour insert into the database.<br/>
+Now, in bonus section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
 
+Be able to update fields in a database without running the whole database
+Make the system able if the API has new records ,to insert these records win postgresql without running again the whole database. From the previous two options, I have implemented the first one. User can update value either from django admin panel or through python code in command line. The command for example to update values in a record is:
 **target = Target.objects.get(id=379)**<br/>
 **target.gene_name = F('gene_name')**<br/>
 **target.uniprot_id = F('uniprot')**<br/>
 **target.gene_name = 'gggg'**<br/>
 **target.uniprot_id = '333'**<br/>
 **target.save()**<br/>
-Now, in bonus section you asked to make system capable of incremental updates. Incremental updates in data pipelines is a spesific procedure that has two explanations:
+If you run the previous commands in python terminal you will see that object with id 379 will update its gene_name and unipto_id in gggg and 333.
 
-Be able to update fields in a database without running the whole database
-Make the system able if the API has new records ,to insert these records win postgresql without running again the whole database. From the previous two options, I have implemented the first one. User can update value either from django admin panel or through python code in command line. The command for example to update values in a record is:
 The second option, I couldn't implement it, as I observed I haven't a field from the API that could informed be about the last record inserted or something like the time each record inserted in order to syhcronize with my code. However, my idea is exactly that,
+
+Finally if you want to delete easily the data from database, the following commands do this:
+
+**Compound.objects.all().delete()**<br/>
+**Target.objects.all().delete()**<br/>
+**Publications.objects.all().delete()**<br/>
+
 
 **MANUAL**
 
@@ -47,7 +53,7 @@ Here are represented instructions for the set up of the application. As I mentio
 8. Now, if we open the pdAdmin it will request us the two passwords, so insert them.
 9. Now, we have to create a database in the pdAdmin panel ( databases -> right click -> create -> database) and give a name. 10. My database name for example is called bioactivities.
 11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities".
-12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: 
+12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
 **pip -r install requirements.txt**
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
 Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/**
