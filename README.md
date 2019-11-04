@@ -1,5 +1,5 @@
 # intelligencia-final-task
-Data-engineering-task In this task the goal was to create a data streaming by inserting spesific data from a third part API into a local postgresql. In the following paragraphs you will see two titles. In BRAIN STORMING paragraph, I will write down and explain the whole logic behind the implementation of the project. The way that I created my database, the way that I chose to retrieve my data,etc.In MANUAL paragraph I will extensively describe the whole procedure that someone has to do in order to run the project.
+In this task the goal was to create a data streaming by inserting spesific data from a third part API into a local postgresql. In the following paragraphs you will see two titles. In BRAIN STORMING paragraph, I will write down and explain my whole logic behind the implementation of the project. The way that I created my database, the way that I chose to retrieve my data,etc.In MANUAL paragraph I will extensively describe the whole procedure that someone has to do in order to run the project.
 
 **BRAIN STORMING**
 
@@ -28,7 +28,7 @@ The second option, is to make the system able if for example the API has new rec
 **target.gene_name = 'gggg'**<br/>
 **target.uniprot_id = '333'**<br/>
 **target.save()**<br/>
-Furthermore, Usert can add new values manually from the django admin page.
+Furthermore, User can add new values manually from the django admin page.
 If you run the previous commands in python terminal you will see that object with id 379 will update its gene_name and unipto_id in gggg and 333.
 
 The second option, I couldn't implement it, as I observed I haven't any field from the API that could informed be about the last record inserted or something like the time in order to syhcronize this with my inserts. However, my idea is exactly that, to take the information (if exists) from the API about the last updated objects, and by adding in my postgresql a field with the time of insertion, ordering it and compare it with the first mentioned.
