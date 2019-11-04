@@ -56,7 +56,7 @@ Here are represented instructions for the set up of the application. As I mentio
 10. My database name for example is called bioactivities.<br/>
 11. The next step is to set the name of the database in you settings.py folder of the project that you have cloned. In my case for example "bioactivities".<br/>
 12.Then you have to set up the virtual envs and install the packages that I have created by typing the following command: <br/>
-**pip -r install requirements.txt**
+**pip -r install requirements.txt** <br/>
 13. Then type on the terminal of pycharm the following commands: python manage.py makemigrations python manage.py migrate
 Our database is ready! Now run the Views.py and drugs_info. The second one will show you a destination. You click on it and add at the end the word /admin. The url is like this: **http://127.0.0.1:8000/admin/** <br/>
 14. You have to enter here the login username and password. We have to create for the database a superuser. Go back to the terminal of pycharm and type: <br/>
